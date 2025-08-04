@@ -1,0 +1,667 @@
+/*
+  Global styles for the DaCapo. progressive web application.
+  The design emphasises clarity and simplicity reminiscent of
+  Apple's iOS. Black typography on a white background provides
+  excellent contrast for readability. A responsive layout adapts
+  gracefully across devices, especially the iPhone 14 Pro.
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    Helvetica, sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  padding: calc(0.75rem + env(safe-area-inset-top)) 1rem 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+main {
+  flex: 1;
+  overflow-y: auto;
+  /* Reserve space for the fixed tab bar plus safe area so content
+     isn't hidden behind it. Adjust the 4rem value if you change
+     the height of the navigation bar. */
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+}
+
+.page {
+  display: none;
+  padding: 1rem;
+}
+
+.page.active {
+  display: block;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* Navigation bar */
+/*
+  The tab bar stays fixed along the bottom of the viewport so it
+  never disappears when scrolling long pages. Padding on the bottom
+  includes the safe‑area inset to avoid overlapping the iPhone home
+  indicator. A high z‑index keeps it above other content.
+*/
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  padding-top: 0.25rem;
+  padding-bottom: calc(0.25rem + env(safe-area-inset-bottom));
+  z-index: 10;
+}
+
+nav button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.2rem;
+  font-size: 0.75rem;
+  background: none;
+  border: none;
+  color: #555555;
+  cursor: pointer;
+}
+
+nav button.active {
+  color: #000000;
+}
+
+/* Scale and align icons within nav buttons */
+nav button svg {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 2px;
+  fill: currentColor;
+}
+
+nav button span {
+  font-size: 0.6rem;
+}
+
+/* Header row for the useful sites page: title and gear icon */
+.links-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+/* Style for the gear button on the Sites page */
+#settings-button {
+  background: none;
+  border: none;
+  padding: 0.2rem;
+  cursor: pointer;
+  color: #555555;
+  display: flex;
+  align-items: center;
+}
+#settings-button:hover svg {
+  fill: #000000;
+}
+
+/* Authentication section styling */
+#auth-section {
+  padding: 1rem;
+}
+#auth-section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  text-align: center;
+}
+#auth-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+#auth-section input[type="email"],
+#auth-section input[type="password"],
+#auth-section input[type="text"] {
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+#auth-section button {
+  padding: 0.5rem 1rem;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+#auth-section button.secondary {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+#auth-section button:hover {
+  opacity: 0.8;
+}
+#auth-section p {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+#auth-section a {
+  color: #007aff;
+  text-decoration: none;
+}
+#auth-section a:hover {
+  text-decoration: underline;
+}
+
+/* Settings panel overlay for profile editing */
+.settings-panel {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
+}
+.settings-panel h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.3rem;
+  text-align: center;
+}
+.settings-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.settings-panel input[type="text"],
+.settings-panel input[type="email"] {
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.settings-panel button {
+  padding: 0.5rem 1rem;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.settings-panel button.secondary {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+.settings-panel button:hover {
+  opacity: 0.8;
+}
+
+/* Generic modal overlay used for settings and donation popups */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Donation pop‑up styling */
+.donation-popup {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+}
+.donation-popup p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.donation-popup button {
+  padding: 0.5rem 1rem;
+  background-color: #f5f5f5;
+  color: #000000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.donation-popup button:hover {
+  opacity: 0.8;
+}
+
+/* Forms */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-row input[type="text"],
+.form-row input[type="date"],
+.form-row input[type="time"] {
+  flex: 1 1 auto;
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Style for select inputs (e.g. repertoire category) */
+.form-row select {
+  flex: 1 1 auto;
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Multi‑line text areas share similar styling to inputs but span
+   across the full row. Used for agenda notes. */
+.form-row textarea {
+  flex: 1 1 100%;
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 3rem;
+}
+
+.form-row button {
+  padding: 0.5rem 1rem;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.form-row button:hover {
+  opacity: 0.8;
+}
+
+/* Lists */
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Highlight upcoming agenda items occurring within the next week. */
+.item-list li.soon {
+  background-color: #fffbe6;
+}
+
+/* Apply a subdued appearance to completed or purchased items. */
+.item-list li.purchased span {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Styles for auxiliary information like notes and countdown in agenda */
+.item-list .note {
+  display: block;
+  font-size: 0.8rem;
+  color: #555555;
+  margin-top: 0.25rem;
+}
+.item-list .countdown {
+  display: block;
+  font-size: 0.8rem;
+  color: #777777;
+  margin-top: 0.25rem;
+}
+
+/* Additional small text for agenda details (payment, contract) */
+.item-list .details {
+  display: block;
+  font-size: 0.8rem;
+  color: #555555;
+  margin-top: 0.25rem;
+}
+
+/* Align the payment status label with the rest of the inputs */
+.payment-status {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+
+/* Barre de recherche du répertoire */
+.search-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+body.dark .search-input {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border-color: #444444;
+}
+
+/* Ensure file input does not shrink too small */
+#agenda-contract {
+  flex: 1 1 100%;
+}
+
+.item-list li:last-child {
+  margin-bottom: 0;
+}
+
+.item-list button {
+  background: none;
+  border: none;
+  color: #e53935;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.item-list button:hover {
+  text-decoration: underline;
+}
+
+/* Checkboxes in the materials list: ensure spacing before the label */
+.item-list li input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+/* Useful sites list */
+/* Useful sites grid: arrange items in two columns on small screens */
+.links-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+/* Section for violin auction sites */
+.auction-section {
+  margin-bottom: 1rem;
+}
+
+.auction-section h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.auction-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.auction-links a {
+  display: block;
+  text-align: center;
+  padding: 0.6rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  color: #007aff;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.auction-links a:hover {
+  background-color: #ececec;
+}
+
+/* Repertoire category grouping */
+#repertoire .category-group {
+  margin-bottom: 1.5rem;
+}
+
+#repertoire .category-group h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+#repertoire .category-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* History list inside materials items */
+.history-list {
+  margin-top: 0.25rem;
+  padding-left: 1rem;
+  font-size: 0.8rem;
+  color: #555555;
+}
+
+.site-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  width: 100%;
+}
+
+.site-item a {
+  flex-grow: 1;
+  text-decoration: none;
+  color: #007aff;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.site-item button {
+  background: none;
+  border: none;
+  color: #e53935;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Contrôles de quantité pour la page Matériel */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+.qty-controls button {
+  background-color: #f5f5f5;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  padding: 0 0.4rem;
+  font-size: 1rem;
+  line-height: 1rem;
+  cursor: pointer;
+}
+.qty-controls button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Metronome & tuner */
+.metronome-container,
+.tuner-container {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+#bpm {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+#bpm-display {
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+#metronome-visual {
+  width: 50px;
+  height: 50px;
+  margin: 0.5rem auto;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  transition: background-color 0.1s ease;
+}
+
+#metronome-visual.active {
+  background-color: #000000;
+}
+
+button.primary {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+button.secondary {
+  background-color: #f5f5f5;
+  color: #000000;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button.primary:hover,
+button.secondary:hover {
+  opacity: 0.8;
+}
+
+/*
+  Mode sombre : lorsque le corps possède la classe .dark, ajuster les
+  couleurs de fond, de texte et de bordure pour toutes les sections.
+*/
+body.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+body.dark header {
+  border-bottom-color: #333333;
+}
+body.dark nav {
+  background-color: #1e1e1e;
+  border-top-color: #333333;
+}
+body.dark nav button {
+  color: #bbbbbb;
+}
+body.dark nav button.active {
+  color: #ffffff;
+}
+body.dark .item-list li,
+body.dark .site-item,
+body.dark .auction-links a {
+  background-color: #1e1e1e;
+  box-shadow: none;
+}
+body.dark .item-list li.soon {
+  background-color: #2a261a;
+  border-left-color: #ffa726;
+}
+body.dark input,
+body.dark select,
+body.dark textarea {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border-color: #444444;
+}
+body.dark .form-row button,
+body.dark button.secondary {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border: 1px solid #444444;
+}
+body.dark .form-row button:hover,
+body.dark button.secondary:hover {
+  background-color: #3a3a3a;
+}
+body.dark .auction-links a {
+  color: #90caf9;
+}
